@@ -1,0 +1,12 @@
+.a-panel {
+    padding-bottom: 10px;
+    height: 100%;
+}
+
+.a-panel-content {
+    padding-top: 10px;
+}
+
+.a-panel-content {
+    position: relative;
+}

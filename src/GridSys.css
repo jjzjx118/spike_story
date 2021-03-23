@@ -1,16 +1,15 @@
-.chirdren {
+.region{
+    
+}
+
+.widget-long-narrow {
     background-color: red;
 }
 
-.basic-chart {
-    height: 50%;
-    width: 50%;
-}
-
 .highcharts-container {
-    /* position: absolute;
+    position: absolute;
     width: 100% !important;
-    height:100% !important; */
+    height:100% !important;
 }
 
 /* #container {

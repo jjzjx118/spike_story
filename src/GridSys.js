@@ -6,14 +6,14 @@ import 'react-resizable/css/styles.css';
 
 import BasicChartA from './Charts/BasicChartA';
 import Highcharts from 'highcharts';
-
+import BasicPanel from './Charts/BasicPanel'
 export default function GridSys() {
 
 
 	let initial_layout = [
-		{ i: 'a', x: 0, y: 0, w: 2, h: 8},
-		{ i: 'b', x: 3, y: 3, w: 5, h: 5, minW: 10, maxW: 10 },
-		// { i: 'c', x: 4, y: 0, w: 3, h: 3 },
+		{ i: 'long-narrow', x: 0, y: 0, w: 12, h: 0.5 },
+		{ i: 'b', x: 3, y: 3, w: 3, h: 12, },
+		{ i: 'c', x: 4, y: 0, w: 3, h: 12 },
 	];
 
 	const [gridWidth, setGridWidth] = useState(0);
@@ -75,21 +75,25 @@ export default function GridSys() {
 
 	return (
 		<div
-			id='container'
+
+			className='region'
 			style={{
 				backgroundColor: 'yellow',
 				width: '100%',
-				height: '100%'
+				height: '500px'
 			}}
 		>
-			{ShowWindowDimensions()}
+			123
+			{/* {ShowWindowDimensions()} */}
 
 			{/* <div className='temp' style={{ height: '100px', width: '100px', backgroundColor: 'blue' }}>
 				<BasicChartA  style={{ height: '100%', width: '100%'}} className='basic-chart' />
 			</div> */}
 
-			<GridLayout
-				style={{ backgroundColor: 'green' }}
+		
+
+			{/* <GridLayout
+				style={{ backgroundColor: 'cyan' }}
 				className='layout'
 				layout={layout}
 				cols={12}
@@ -106,7 +110,10 @@ export default function GridSys() {
 				<div className='chirdren' key='b'>
 					<BasicChartA className='basic-chart' />
 				</div>
-			</GridLayout>
+				<div className='chirdren' key='c'>
+					<BasicChartA className='basic-chart' />
+				</div>
+			</GridLayout> */}
 		</div>
 	);
 }

@@ -1,21 +1,20 @@
 import React, { useEffect, useState, forwardRef, useRef, useImperativeHandle } from 'react';
-// import Highcharts from "highcharts";
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import HC_more from "highcharts/highcharts-more";
-
 import './Chart.css'
-HC_more(Highcharts);
-export default function hc_bar () {
 
-  // const [option, setOption] = useState(chartOption);
-  const refreshSize = () =>{
-    for (let i = 0; i < Highcharts.charts.length; i += 1) {
+HC_more(Highcharts);
+export default function hc_bar() {
+
+	// const [option, setOption] = useState(chartOption);
+	const refreshSize = () => {
+		for (let i = 0; i < Highcharts.charts.length; i += 1) {
 			if (Highcharts.charts[i] !== undefined) {
 				Highcharts.charts[i].reflow(); // here is the magic to update charts' looking
 			}
 		}
-  }
+	}
 
 	const chartData = [
 		{
@@ -81,10 +80,10 @@ export default function hc_bar () {
 
 
 	return (
-		<div style={{height:'100%',width:'100%'}}>
-      <HighchartsReact 
-      style={{height:'100%',width:'100%'}}
-      allowChartUpdate={true} updateArgs={[true, true, true]} highcharts={Highcharts} options={chartOption} />
+		<div style={{ height: '100%', width: '100%' }}>
+			<HighchartsReact
+				style={{ height: '100%', width: '100%' }}
+				allowChartUpdate={true} updateArgs={[true, true, true]} highcharts={Highcharts} options={chartOption} />
 		</div>
 	);
 };
