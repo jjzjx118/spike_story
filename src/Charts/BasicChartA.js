@@ -52,6 +52,7 @@ export default function hc_bar () {
 
 	const chartOption = {
 		chart: {
+
 			type: 'bar',
 		},
 		scrollbar: {
