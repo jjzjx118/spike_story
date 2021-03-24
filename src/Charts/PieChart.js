@@ -7,44 +7,8 @@ import './Chart.css'
 
 HC_more(Highcharts);
 
-const PanleHeight = 30;
-const PieChart = forwardRef ((props,ref) => {
-
-
-    const [option, setOption] = useState(pieChartConfig);
-
-    useImperativeHandle(ref, () => ({
-        toggle(updatedSize) {
-          console.log('PieChart_updatedSize',updatedSize);
-          updateSize(updatedSize)
-        }
-      }));
-
-    const updateSize = (updatedSize) =>{
-        let newOption = option;
-        if(updatedSize){
-            newOption.chart.width = updatedSize.width;
-            newOption.chart.height = updatedSize.height - PanleHeight;
-            setOption(Object.assign({},newOption))
-        }
-
-    }
-
-    useEffect(() => {
-    //    console.log('update chart config',option)
-    }, [option])
-
-    return (
-        <div style={{ height: '100%', width: '100%' }}>
-            <HighchartsReact
-                // style={{ height: '100%', width: '100%' }} d
-                allowChartUpdate={true} updateArgs={[true, true, true]}
-                highcharts={Highcharts}
-                options={pieChartConfig} />
-        </div>
-    );
-});
-
+const PanleHeight = 21;
+const PieChart = forwardRef((props, ref) => {
 
 let pieChartConfig = {
     chart: {
@@ -52,8 +16,6 @@ let pieChartConfig = {
         plotBorderWidth: null,
         plotShadow: false,
         type: 'pie',
-        width:600,
-        height:200
     },
     title: {
         text: 'Browser market shares in January, 2018'
@@ -102,5 +64,56 @@ let pieChartConfig = {
         }]
     }]
 }
+
+    const [option, setOption] = useState(pieChartConfig);
+
+    useImperativeHandle(ref, () => ({
+        toggle(updatedSize) {
+            //   console.log('update chart on ',props.widgetId,'newSize',updatedSize);
+            //   console.log('newSize: ',updatedSize);
+
+            updateSize(updatedSize)
+        }
+    }));
+
+    const updateSize = (updatedSize) => {
+
+        // console.log('updatedSize',updatedSize)
+
+        // let newOption = option;
+
+        // const newSizeObj = JSON.parse(localStorage.getItem(`${props.widgetId}`))
+
+        console.log('updatedSize', updatedSize)
+        if (updatedSize) {
+            option.chart.width = updatedSize.width;
+            option.chart.height = updatedSize.height - PanleHeight;
+            const newOption = Object.assign({}, option)
+            console.log('newOption.chart ' + props.widgetId, newOption.chart)
+
+            setOption(newOption)
+        }
+
+
+        // console.log('newSiz ' + props.widgetId, updatedSize)
+
+    }
+
+    useEffect(() => {
+        console.log('update chart config on' + props.widgetId, option.chart)
+    }, [option])
+
+    return (
+        <div style={{ height: '100%', width: '100%' }}>
+            <HighchartsReact
+                allowChartUpdate={true} 
+                updateArgs={[true, true, true]}
+                highcharts={Highcharts}
+                options={option} />
+        </div>
+    );
+});
+
+
 
 export default PieChart;

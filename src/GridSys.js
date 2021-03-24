@@ -12,30 +12,39 @@ import BasicPanel from './Charts/BasicPanel'
 export default function GridSys() {
 
 
-	const ref1 = useRef();
-	const ref2 = useRef();
+	const ref1 = useRef(null);
+	const ref2 = useRef(null);
+	const [refArray, setRefArray] = useState([ref1, ref2]);
+
 
 	const widgetInfos = [
 		{
 			widgetId: 'widget-01',
-			ref:useRef(),
+			ref: refArray[0],
 			key: 'widget-01',
 			layout: { i: 'small-chart', x: 0, y: 0, w: 3, h: 5 }
 		},
 		{
 			widgetId: 'widget-02',
-			ref: useRef(),
+			ref: refArray[1],
 			key: 'widget-02',
 			layout: { i: 'small-chart2', x: 5, y: 0, w: 3, h: 5 }
 
-		}
+		},
+		// {
+		// 	widgetId: 'widget-03',
+		// 	ref: useRef(null),
+		// 	key: 'widget-03',
+		// 	layout: { i: 'small-chart3', x: 0, y: 5, w: 3, h: 5 }
+
+		// },
 	]
 
 
 	let initial_layout = [
 		{ i: 'long-narrow', x: 0, y: 0, w: 12, h: 0.5 },
 		{ i: 'small-chart', x: 0, y: 0, w: 3, h: 5 },
-		{ i: 'small-chart2', x: 4, y: 0, w: 3, h: 12 },
+		{ i: 'small-chart2', x: 4, y: 0, w: 5, h: 12 },
 	];
 
 	const [gridWidth, setGridWidth] = useState(0);
@@ -77,56 +86,58 @@ export default function GridSys() {
 			console.log('containerWidth', containerWidth);
 		}
 
-		updateChartSize()
+
 
 
 	});
 
 
-	useEffect(() => {
-		console.log('layout', layout)
-	}, [layout])
 
 	const onLayoutChange = (layout) => {
-		console.log('params', layout);
+		// console.log('params', layout);
 		setLayout(layout)
 		console.log('onLayoutChange', Highcharts.charts);
 		for (let i = 0; i < Highcharts.charts.length; i += 1) {
 			if (Highcharts.charts[i] !== undefined) {
-				Highcharts.charts[i].reflow(); 
+				Highcharts.charts[i].reflow();
 			}
 		}
 
-		updateChartSize()
-
 	};
 
-	const updateChartSize = () => {
+	const updateChartSize = (resizedItem) => {
 
-		console.log('updateChartSize')
+		console.log('onResizeStop', resizedItem)
+		const widgetDOM = document.getElementById(resizedItem.i);
+		console.log('widgetDOM', widgetDOM, 'chartId - ', resizedItem.i)
 
-		widgetInfos.map((chartInfo) => {
-			const pie_chart_info = document.getElementById(chartInfo.widgetId);
-			console.log('pie_chart_info', chartInfo)
+		if (!widgetDOM) { return }
 
+		const param = {
+			height: widgetDOM.clientHeight,
+			width: widgetDOM.clientWidth
+		}
 
-			if (!pie_chart_info) { return }
-			const param = {
-				height: pie_chart_info.clientHeight,
-				width: pie_chart_info.clientWidth
-			}
-
-			console.log('pie_chart_info', pie_chart_info.clientWidth)
-			console.log('pie_chart_info', pie_chart_info.clientHeight)
-
-			// const findRef = 
-
-			chartInfo?.ref?.current && chartInfo.ref.current.toggle(param);
+		const resizedItemObj = widgetInfos.find((e) => {
+			return e.widgetId === resizedItem.i
 		})
 
+		if (resizedItemObj) {
+			resizedItemObj?.ref?.current && resizedItemObj?.ref?.current.toggle(param);
 
-		// ref.current && ref.current.toggle(param);
+		}
 	}
+
+
+	const updateAllWidget = () => {
+
+	}
+
+	const onResizeStop = (...params) => {
+		const resizedItem = params[2];
+		updateChartSize(resizedItem)
+	}
+
 
 
 	const generateWidget = (widgets) => {
@@ -135,7 +146,7 @@ export default function GridSys() {
 			widgets.map((widget) =>
 				<div data-grid={widget.layout} className='widget' key={widget.key}>
 					<BasicPanel id={widget.widgetId}>
-						<PieChart ref={widget.ref} className='basic-chart' />
+						<PieChart widgetId={widget.widgetId} ref={widget.ref} className='basic-chart' />
 					</BasicPanel>
 				</div>
 			)
@@ -169,6 +180,7 @@ export default function GridSys() {
 						autoSize={true}
 						onLayoutChange={(layout) => onLayoutChange(layout)}
 						margin={[0, 0]}
+						onResizeStop={onResizeStop}
 					>
 						{generateWidget(widgetInfos)}
 
