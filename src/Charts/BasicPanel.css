@@ -4,9 +4,23 @@
 }
 
 .a-panel-content {
-    padding-top: 10px;
+    /* padding-top: 10px; */
 }
 
 .a-panel-content {
     position: relative;
+}
+
+.basic-panel{
+  
+}
+
+.a-panel-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.a-panel-content{
+    height: 100%;
+    width: 100%;
 }

@@ -4,11 +4,15 @@ import BasicChartA from './BasicChartA'
 import './BasicPanel.css'
 
 
-function BasicPanel() {
+function BasicPanel(props) {
+
+    console.log('BasicPanel',props)
+
     return (
         <Panel
             title="Header"
-            className="a-increase-child-color-level-by-1"
+            id={props.id}
+            className="basic-panel"
             renderRight={() => {
                 return (
                     <React.Fragment>
@@ -17,7 +21,7 @@ function BasicPanel() {
                 );
             }}
         >
-            <BasicChartA></BasicChartA>
+            {props.children}
         </Panel>
     )
 }

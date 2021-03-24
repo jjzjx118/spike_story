@@ -4,7 +4,11 @@
 
 .widget-long-narrow {
     background-color: red;
-}
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;}
 
 .highcharts-container {
     position: absolute;
@@ -12,6 +16,9 @@
     height:100% !important;
 }
 
+.widget{
+    background-color: indianred;
+}
 /* #container {
     height:100%;
     width:100%;

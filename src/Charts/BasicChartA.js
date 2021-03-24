@@ -8,6 +8,8 @@ HC_more(Highcharts);
 export default function hc_bar() {
 
 	// const [option, setOption] = useState(chartOption);
+
+
 	const refreshSize = () => {
 		for (let i = 0; i < Highcharts.charts.length; i += 1) {
 			if (Highcharts.charts[i] !== undefined) {
