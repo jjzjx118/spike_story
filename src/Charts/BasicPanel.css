@@ -3,16 +3,13 @@
     height: 100%;
 }
 
-.a-panel-content {
-    /* padding-top: 10px; */
-}
 
 .a-panel-content {
     position: relative;
 }
 
 .basic-panel{
-  
+    height: 100%;
 }
 
 .a-panel-header{
@@ -21,6 +18,6 @@
 }
 
 .a-panel-content{
-    height: 100%;
-    width: 100%;
+    /* height: 100%;
+    width: 100%; */
 }

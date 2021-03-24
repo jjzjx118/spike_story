@@ -2,7 +2,7 @@ import GridSys from './GridSys';
 
 function App() {
 	return (
-		<div className='App'>
+		<div style={{padding:'10px'}} className='App'>
 			<GridSys />
 		</div>
 	);

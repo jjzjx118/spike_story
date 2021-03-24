@@ -1,5 +1,13 @@
-.region{
-    
+.region {
+    margin-bottom: 30px;
+    width: 100%;
+    /* background-color:lightpink;
+    background-color:lightskyblue */
+
+}
+
+.react-grid-layout-contianer {
+    width: 100%;
 }
 
 .widget-long-narrow {
@@ -8,17 +16,25 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;}
+    align-items: center;
+}
 
 .highcharts-container {
     position: absolute;
     width: 100% !important;
-    height:100% !important;
+    height: 100% !important;
 }
 
-.widget{
+.widget {
     background-color: indianred;
 }
+
+.region-container {
+    background-color: lightgrey;
+
+
+}
+
 /* #container {
     height:100%;
     width:100%;
